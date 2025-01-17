@@ -1,3 +1,5 @@
+import { Button } from "neetoui";
+
 import "./App.css";
 // eslint-disable-next-line import/extensions
 import logo from "./logo.svg";
@@ -18,6 +20,7 @@ const App = () => (
         Learn React
       </a>
     </header>
+    <Button label="Click here" />
   </div>
 );
 
