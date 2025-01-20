@@ -6,13 +6,13 @@ import { Button } from "neetoui";
 
 const Carousel = ({ imageUrls, altText }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const moveCarouseForward = () => {
+  const handleNext = () => {
     setCurrentIndex(prevState =>
       prevState + 1 === imageUrls.length ? 0 : prevState + 1
     );
   };
 
-  const moveCarouseBackward = () => {
+  const handlePrevious = () => {
     setCurrentIndex(prevState =>
       prevState - 1 < 0 ? imageUrls - 1 : prevState - 1
     );
@@ -24,14 +24,14 @@ const Carousel = ({ imageUrls, altText }) => {
         className="shrink-0 focus-within:ring-0 hover:bg-transparent"
         icon={Left}
         style="text"
-        onClick={moveCarouseBackward}
+        onClick={handlePrevious}
       />
       <img {...{ altText }} src={imageUrls[currentIndex]} />
       <Button
         className="shrink-0 focus-within:ring-0 hover:bg-transparent"
         icon={Right}
         style="text"
-        onClick={moveCarouseForward}
+        onClick={handleNext}
       />
       <div className="flex space-x-1">
         {imageUrls.map((_, index) => (
