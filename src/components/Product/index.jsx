@@ -1,15 +1,14 @@
-import Details from "./Details";
-import Header from "./Header";
-import Image from "./Image";
+import { IMAGE_URLS } from "./constant";
+
+import Carousel from "../../Utils/Carousel";
+import Details from "../../Utils/Details";
+import Header from "../../Utils/Header";
 
 const Product = () => (
   <div className="px-6 pb-6">
     <Header text="Infinix INBOOK" />
     <div className="w-2/5">
-      <Image
-        altText="Infinix INBOOK"
-        imageURL="https://ik.imagekit.io/d9mvewbju/SmileCart/thumbnail_61_7PaLfb.jpg"
-      />
+      <Carousel imageUrls={IMAGE_URLS} title="Infinix Inbook" />
     </div>
     <div className="w-3/5 space-y-4">
       <Details
