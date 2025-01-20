@@ -8,7 +8,7 @@ const Product = () => (
   <div className="px-6 pb-6">
     <Header text="Infinix INBOOK" />
     <div className="w-2/5">
-      <Carousel imageUrls={IMAGE_URLS} title="Infinix Inbook" />
+      <Carousel altText="Infinix Inbook" imageUrls={IMAGE_URLS} />
     </div>
     <div className="w-3/5 space-y-4">
       <Details
