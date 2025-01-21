@@ -17,7 +17,6 @@ const Carousel = ({ imageUrls, altText }) => {
   }, []);
 
   const resetTimer = () => {
-    console.log("resetting");
     clearInterval(timeRef.current);
     timeRef.current = setInterval(handleNext, 3000);
   };
@@ -30,7 +29,7 @@ const Carousel = ({ imageUrls, altText }) => {
 
   const handlePrevious = () => {
     setCurrentIndex(prevState =>
-      prevState - 1 < 0 ? imageUrls - 1 : prevState - 1
+      prevState - 1 < 0 ? imageUrls.length - 1 : prevState - 1
     );
     resetTimer();
   };
