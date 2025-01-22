@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import axios from "axios";
+import productsApi from "apis/product";
 import { append, isNotNil } from "ramda";
 
 import Carousel from "../../Utils/Carousel";
@@ -13,13 +13,8 @@ const Product = () => {
   const [product, setProduct] = useState({});
   const fetchProduct = async () => {
     try {
-      const url =
-        "https://smile-cart-backend-staging.neetodeployapp.com/products/infinix-inbook-2";
-      const response = await axios.get(url);
-      if (response.status !== 200) {
-        throw new Error("Something went wrong");
-      }
-      setProduct(response.data);
+      const product = await productsApi.show();
+      setProduct(product);
     } catch (error) {
       console.error("Something went wrong", error);
     } finally {
@@ -34,10 +29,10 @@ const Product = () => {
   const {
     name,
     description,
-    image_urls: defaultImageUrl,
-    image_urls: imageUrls,
+    imageUrl: defaultImageUrl,
+    imageUrls,
     mrp: MRP,
-    offer_price: offerPrice,
+    offerPrice,
   } = product;
   const totalDiscounts = MRP - offerPrice;
   const discountPercentage = ((totalDiscounts / MRP) * 100).toFixed(1);
