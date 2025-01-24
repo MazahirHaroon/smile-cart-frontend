@@ -1,22 +1,28 @@
 import { useEffect, useState } from "react";
 
 import productsApi from "apis/product";
+import {
+  Header,
+  Details,
+  Carousel,
+  Loader,
+  PageNotFound,
+} from "components/commons";
 import { append, isNotNil } from "ramda";
-
-import Carousel from "../../Utils/Carousel";
-import Details from "../../Utils/Details";
-import Header from "../../Utils/Header";
-import Loader from "../../Utils/Loader";
+import { useParams } from "react-router-dom";
 
 const Product = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
   const [product, setProduct] = useState({});
+  const { slug } = useParams();
+
   const fetchProduct = async () => {
     try {
-      const product = await productsApi.show();
+      const product = await productsApi.show(slug);
       setProduct(product);
-    } catch (error) {
-      console.error("Something went wrong", error);
+    } catch {
+      setIsError(true);
     } finally {
       setIsLoading(true);
     }
@@ -37,9 +43,11 @@ const Product = () => {
   const totalDiscounts = MRP - offerPrice;
   const discountPercentage = ((totalDiscounts / MRP) * 100).toFixed(1);
 
+  if (isError) return <PageNotFound />;
+
   return isLoading ? (
     <div className="px-6 pb-6">
-      <Header text={name} />
+      <Header shouldShowBackButton title={name} />
       <div className="w-2/5">
         {isNotNil(imageUrls) ? (
           <Carousel
