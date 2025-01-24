@@ -8,12 +8,9 @@ const show = async slug => {
   }
 };
 
-const fetch = async () => {
+const fetch = async params => {
   try {
-    const products = await axios.get("products");
-    console.log(products);
-
-    return products;
+    return await axios.get("products", { params });
   } catch (error) {
     throw new Error(`Something went wrong, ${error}`);
   }
