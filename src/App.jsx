@@ -5,7 +5,7 @@ import routes from "routes";
 
 import PageNotFound from "./components/commons/PageNotFound";
 import Product from "./components/Product";
-import ProductList from "./components/Product/List";
+import ProductList from "./components/ProductList";
 import CartItemsContext from "./contexts/CartItemsContext";
 // eslint-disable-next-line import/extensions
 
