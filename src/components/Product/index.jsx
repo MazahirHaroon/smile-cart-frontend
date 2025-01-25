@@ -8,6 +8,7 @@ import {
   Loader,
   PageNotFound,
 } from "components/commons";
+import AddToCart from "components/commons/AddToCart";
 import { append, isNotNil } from "ramda";
 import { useParams } from "react-router-dom";
 
@@ -68,6 +69,7 @@ const Product = () => {
             offerPrice,
           }}
         />
+        <AddToCart {...{ slug }} />
       </div>
     </div>
   ) : (
