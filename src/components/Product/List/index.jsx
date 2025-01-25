@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import productsApi from "apis/product";
 import { Header, Loader } from "components/commons";
+import useDebounce from "hooks/useDebounce";
 import { Search } from "neetoicons";
 import { Input, NoData } from "neetoui";
 import { isEmpty } from "ramda";
@@ -12,14 +13,17 @@ const List = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [products, setProducts] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
+  const debouncedSearchTerm = useDebounce(searchTerm);
 
   useEffect(() => {
     fetchList();
-  }, [searchTerm]);
+  }, [debouncedSearchTerm]);
 
   const fetchList = async () => {
     try {
-      const response = await productsApi.fetch({ searchTerm });
+      const response = await productsApi.fetch({
+        searchTerm: debouncedSearchTerm,
+      });
       setProducts(response.products);
     } catch (error) {
       console.error("Something went wrong", error);
